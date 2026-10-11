@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Join my Drift Out room</title>
+<meta name="description" content="You are invited to a race in Drift Out – Car Chase Racing. Tap to open the game in this room.">
+<meta property="og:title" content="Join my Drift Out room">
+<meta property="og:description" content="Tap to open the game and race me. Free on iPhone and Android.">
+<meta property="og:image" content="https://geti007.github.io/icon.png">
+<meta property="og:type" content="website">
+<meta name="robots" content="noindex">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"><link rel="stylesheet" href="../style.css">
+<style>
+.code{font-family:'Press Start 2P',monospace;font-size:44px;letter-spacing:.18em;color:var(--y);text-align:center;padding:18px 0 10px 0.18em;margin:0}
+.lbl{font-family:'Press Start 2P',monospace;font-size:10px;color:var(--d);text-align:center;margin:0}
+.big{display:block;text-align:center;font-size:14px;padding:18px;margin:16px 0 4px}
+.stores{display:flex;gap:10px;flex-wrap:wrap}.stores .btn{flex:1 1 200px;text-align:center;background:var(--panel);color:var(--t);border:2px solid var(--line)}
+ol{padding-left:22px;margin:8px 0 0}li{margin:6px 0}
+.hide{display:none}
+</style></head>
+<body><div class="wrap">
+<h1>DRIFT <b>OUT</b></h1>
+<p class="tag">You are invited to a race</p>
+
+<div class="card" id="has">
+<p class="lbl">ROOM CODE</p>
+<p class="code" id="code">----</p>
+<a class="btn big" id="open" href="#">OPEN IN DRIFT OUT</a>
+<p style="margin:8px 0 0;color:var(--d);font-size:14px;text-align:center">Opens the game straight in this room.</p>
+<p class="hide" id="hint" style="margin:10px 0 0;font-size:14px;text-align:center;color:var(--y)">Nothing happened? The game is not on this phone yet. Get it below, then tap the button again.</p>
+</div>
+
+<div class="card hide" id="none">
+<p>This invite link has no room code in it. Ask your friend to send the invite again, or open the game, tap ONLINE and type the 4-letter code they give you.</p>
+</div>
+
+<h2>DON'T HAVE THE GAME YET?</h2>
+<div class="card">
+<div class="stores">
+<a class="btn" id="ios" href="https://apps.apple.com/app/id6817871476">GET IT ON THE APP STORE</a>
+<a class="btn" id="and" href="https://play.google.com/store/apps/details?id=com.podu.driftout">GET IT ON GOOGLE PLAY</a>
+</div>
+<ol>
+<li>Install Drift Out. It is free.</li>
+<li>Come back to this page and tap <b>OPEN IN DRIFT OUT</b>, or open the game, tap <b>ONLINE</b> and type the room code under <b>JOIN A FRIEND</b>.</li>
+</ol>
+</div>
+
+<footer>© 2026 Drift Out · <a href="../index.html">Support</a> · <a href="../privacy.html">Privacy Policy</a></footer>
+</div>
+<script>
+(function(){
+  var m=/[?&](?:r|room)=([A-Za-z0-9]{4})(?![A-Za-z0-9])/.exec(location.search), code=m?m[1].toUpperCase():'';
+  var ua=navigator.userAgent||'', android=/Android/i.test(ua), ios=/iPhone|iPad|iPod/i.test(ua)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+  if(!code){ document.getElementById('has').className='card hide'; document.getElementById('none').className='card'; return; }
+  document.getElementById('code').textContent=code; document.title='Join Drift Out room '+code;
+  var deep='driftout://join/'+code;
+  /* Android: an intent link opens the app, or Google Play when the app is not installed */
+  var intent='intent://join/'+code+'#Intent;scheme=driftout;package=com.podu.driftout;S.browser_fallback_url='+encodeURIComponent('https://play.google.com/store/apps/details?id=com.podu.driftout')+';end';
+  document.getElementById('open').href=android?intent:deep;
+  /* still on this page a moment after the tap: the game is probably not installed */
+  document.getElementById('open').addEventListener('click',function(){ setTimeout(function(){ if(!document.hidden) document.getElementById('hint').className=''; },2200); });
+  if(ios) document.getElementById('and').className='btn hide'; if(android) document.getElementById('ios').className='btn hide';
+})();
+</script>
+</body></html>
